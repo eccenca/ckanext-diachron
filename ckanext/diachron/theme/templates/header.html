@@ -19,12 +19,11 @@
                 <span class="username">{{ c.userobj.display_name }}</span>
               </a>
             </li>
-            {% set new_activities = h.new_activities() %}
-            <li class="notifications {% if new_activities > 0 %}notifications-important{% endif %}">
-              {% set notifications_tooltip = ngettext('Dashboard (%(num)d new item)', 'Dashboard (%(num)d new items)', new_activities) %}
+            <li class="notifications {% if c.new_activities > 0 %}notifications-important{% endif %}">
+              {% set notifications_tooltip = ngettext('Dashboard (%(num)d new item)', 'Dashboard (%(num)d new items)', c.new_activities) %}
               <a href="{{ h.url_for(controller='user', action='dashboard') }}" title="{{ notifications_tooltip }}">
                 <i class="icon-dashboard"></i>
-                <span>{{ new_activities }}</span>
+                <span>{{ c.new_activities }}</span>
               </a>
             </li>
             {% block header_account_settings_link %}
@@ -90,7 +89,7 @@
               ('search', _('Datasets')),
               ('organizations_index', _('Organizations')),
               ('group_index', _('Groups')),
-              ('about', _('Aboutr'))
+              ('about', _('About'))
             ) }}
             {% endblock %}
           </ul>
