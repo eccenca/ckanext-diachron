@@ -88,18 +88,25 @@
         <nav class="section navigation">
           <ul class="nav nav-pills">
             {% block header_site_navigation_tabs %}
-            {{ h.build_nav_main(
-              ('search', _('Datasets')),
-              ('organizations_index', _('Organizations')),
-              ('group_index', _('Groups')),
-              ('about', _('About'))
-            ) }}
+            {% if h.check_access('site_read') %}
+              {{ h.build_nav_main(
+                ('search', _('Datasets')),
+                ('organizations_index', _('Organizations')),
+                ('group_index', _('Groups')),
+                ('about', _('About'))
+              ) }}
+            {% else %}
+              {{ h.build_nav_main(
+                ('about', _('About'))
+              ) }}
+            {% endif %}
             {% endblock %}
           </ul>
         </nav>
       {% endblock %}
 
       {% block header_site_search %}
+      {% if h.check_access('site_read') %}
         <form class="section site-search simple-input" action="{% url_for controller='package', action='search' %}" method="get">
           <div class="field">
             <label for="field-sitewide-search">{{ _('Search Datasets') }}</label>
@@ -107,6 +114,7 @@
             <button class="btn-search" type="submit">{{ _('Search') }}</button>
           </div>
         </form>
+      {% endif %}
       {% endblock %}
 
     </div>
