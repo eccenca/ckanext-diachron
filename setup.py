@@ -13,7 +13,7 @@ setup(
 	keywords='',
 	author='Knud M\xc3\xb6ller',
 	author_email='kmoeller@brox.de',
-	url='',
+	url='https://github.com/eccenca/ckanext-diachron',
 	license='MIT License',
 	packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
 	namespace_packages=['ckanext', 'ckanext.diachron'],
@@ -25,6 +25,7 @@ setup(
 	entry_points=\
 	"""
         [ckan.plugins]
+        diachron=ckanext.diachron.plugin:DiachronPlugin
 	# Add plugins here, eg
 	# myplugin=ckanext.diachron:PluginClass
 	""",
