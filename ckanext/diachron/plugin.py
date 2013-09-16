@@ -1,5 +1,9 @@
-import ckan.plugins as plugins
+# coding: utf-8
 
+import os
+import logging
+import ckan.plugins as plugins
+import ckan.plugins.toolkit as toolkit
 
 class DiachronPlugin(plugins.SingletonPlugin):
     
