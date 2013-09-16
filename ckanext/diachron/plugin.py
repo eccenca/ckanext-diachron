@@ -17,5 +17,8 @@ class DiachronPlugin(plugins.SingletonPlugin):
         # set our local template and resource overrides
         toolkit.add_public_directory(config, our_public_dir)
         toolkit.add_template_directory(config, template_dir)
+        
+        config['ckan.site_title'] = "Diachron Data Repository"
+        config['ckan.site_logo'] = "/base/images/diachron_logo.png"
 
-    
+        
