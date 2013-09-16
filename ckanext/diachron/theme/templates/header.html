@@ -48,7 +48,9 @@
           <ul class="unstyled">
             {% block header_account_notlogged %}
             <li>{% link_for _('Log in'), controller='user', action='login' %}</li>
+            {% if h.check_access('site_read') %}
             <li>{% link_for _('Register'), controller='user', action='register', class_='sub' %}</li>
+            {% endif %}
             {% endblock %}
           </ul>
         </nav>
@@ -85,25 +87,33 @@
         <nav class="section navigation">
           <ul class="nav nav-pills">
             {% block header_site_navigation_tabs %}
-            {{ h.build_nav_main(
-              ('search', _('Datasets')),
-              ('organizations_index', _('Organizations')),
-              ('group_index', _('Groups')),
-              ('about', _('About'))
-            ) }}
+            {% if h.check_access('site_read') %}
+              {{ h.build_nav_main(
+                ('search', _('Datasets')),
+                ('organizations_index', _('Organizations')),
+                ('group_index', _('Groups')),
+                ('about', _('About'))
+              ) }}
+            {% else %}
+              {{ h.build_nav_main(
+                ('about', _('About'))
+              ) }}
+            {% endif %}
             {% endblock %}
           </ul>
         </nav>
       {% endblock %}
 
       {% block header_site_search %}
-        <form class="section site-search simple-input" action="{% url_for controller='package', action='search' %}" method="get">
-          <div class="field">
-            <label for="field-sitewide-search">{{ _('Search Datasets') }}</label>
-            <input id="field-sitewide-search" type="text" name="q" placeholder="{{ _('Search') }}" />
-            <button class="btn-search" type="submit">{{ _('Search') }}</button>
-          </div>
-        </form>
+        {% if h.check_access('site_read') %}
+          <form class="section site-search simple-input" action="{% url_for controller='package', action='search' %}" method="get">
+            <div class="field">
+              <label for="field-sitewide-search">{{ _('Search Datasets') }}</label>
+              <input id="field-sitewide-search" type="text" name="q" placeholder="{{ _('Search') }}" />
+              <button class="btn-search" type="submit">{{ _('Search') }}</button>
+            </div>
+          </form>
+        {% endif %}
       {% endblock %}
 
     </div>
