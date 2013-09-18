@@ -5,8 +5,12 @@ import logging
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 
+log = logging.getLogger(__name__)
 
 def site_read(context, data_dict=None):
+    log.debug("site_read")
+    log.debug(context);
+    log.debug(data_dict);
     return {'success': False, 'msg': 'No one is allowed to see anything'}
 
 class DiachronPlugin(plugins.SingletonPlugin):
