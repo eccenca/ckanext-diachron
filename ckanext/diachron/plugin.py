@@ -8,10 +8,21 @@ import ckan.plugins.toolkit as toolkit
 log = logging.getLogger(__name__)
 
 def site_read(context, data_dict=None):
-    log.debug("site_read")
-    log.debug(context);
-    log.debug(data_dict);
-    return {'success': False, 'msg': 'No one is allowed to see anything'}
+    # Get the user name of the logged-in user.
+    user_name = context['user']
+    
+    # We have the logged-in user's user name, get their user id.
+    convert_user_name_or_id_to_id = toolkit.get_converter(
+        'convert_user_name_or_id_to_id')
+    try:
+        user_id = convert_user_name_or_id_to_id(user_name, context)
+    except toolkit.Invalid:
+        # The user doesn't exist (e.g. they're not logged-in).
+        return {'success': False,
+                'msg': 'You must be logged-in as a member of the curators '
+                       'group to create new groups.'}
+    
+    return {'success': True, 'msg': 'You are logged in, good.'}
 
 class DiachronPlugin(plugins.SingletonPlugin):
     
