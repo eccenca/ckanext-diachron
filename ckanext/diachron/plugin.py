@@ -4,6 +4,7 @@ import os
 import logging
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+import ckan.logic.validators as logic_validators
 
 log = logging.getLogger(__name__)
 
@@ -16,7 +17,7 @@ def site_read(context, data_dict=None):
         'convert_user_name_or_id_to_id')
     try:
         user_id = convert_user_name_or_id_to_id(user_name, context)
-    except toolkit.Invalid:
+    except logic_validators.Invalid:
         # The user doesn't exist (e.g. they're not logged-in).
         return {'success': False,
                 'msg': 'You must be logged-in as a member of the curators '
