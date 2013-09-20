@@ -61,5 +61,5 @@ class DiachronPlugin(plugins.SingletonPlugin):
     def get_auth_functions(self):
         return {
             'site_read': site_read,
-            'package_read': dataset_read
+            'package_read': package_read
         }
