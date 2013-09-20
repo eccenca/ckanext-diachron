@@ -1,2 +1,4 @@
 *.pyc
 ckanext_diachron.egg-info/
+
+ckanext/diachron/theme/templates/header copy.html
