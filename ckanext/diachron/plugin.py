@@ -7,7 +7,7 @@ import ckan.plugins.toolkit as toolkit
 
 log = logging.getLogger(__name__)
 
-def dataset_read(context, data_dict=None):
+def package_read(context, data_dict=None):
     # Get the user name of the logged-in user.
     user_name = context['user']
     
@@ -61,5 +61,5 @@ class DiachronPlugin(plugins.SingletonPlugin):
     def get_auth_functions(self):
         return {
             'site_read': site_read,
-            'dataset_read': dataset_read
+            'package_read': dataset_read
         }
