@@ -49,7 +49,7 @@
           <ul class="unstyled">
             {% block header_account_notlogged %}
             <li>{% link_for _('Log in'), controller='user', action='login' %}</li>
-            {% if h.check_access('site_read') % }
+            {% if h.check_access('site_read') %}
               <li>{% link_for _('Register'), controller='user', action='register', class_='sub' %}</li>
             {% endif %}
             {% endblock %}
