@@ -86,12 +86,18 @@
         <nav class="section navigation">
           <ul class="nav nav-pills">
             {% block header_site_navigation_tabs %}
-            {{ h.build_nav_main(
-              ('search', _('Datasets')),
-              ('organizations_index', _('Organizations')),
-              ('group_index', _('Groups')),
-              ('about', _('Aboutr'))
-            ) }}
+            {% if h.check_access('site_read') %}
+              {{ h.build_nav_main(
+                ('search', _('Datasets')),
+                ('organizations_index', _('Organizations')),
+                ('group_index', _('Groups')),
+                ('about', _('About'))
+              ) }}
+            {% else %}
+              {{ h.build_nav_main(
+                ('about', _('About'))
+              ) }}
+            {% endif %}
             {% endblock %}
           </ul>
         </nav>
